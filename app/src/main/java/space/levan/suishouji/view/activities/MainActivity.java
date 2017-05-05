@@ -79,6 +79,22 @@ public class MainActivity extends AppCompatActivity
         });
 
         setupViewPager(mViewpager);
+
+        /*
+        Bill bill = new Bill();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        Date date = new Date(System.currentTimeMillis());
+        bill.time = dateFormat.format(date);
+        bill.mode = "支出";
+        bill.category = "美团";
+        bill.method = "支付宝";
+        bill.amount = "95.00";
+        bill.remark = "";
+        RealmUtils.addToBill(bill);
+
+        Bill newBill = RealmUtils.getAllBill().get(0);
+        Log.w("WZY", newBill.toString());
+        */
     }
 
     private void setupViewPager(ViewPager mViewpager)

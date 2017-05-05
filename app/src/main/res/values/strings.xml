@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">随手记</string>
-    <string name="title_record">记一记</string>
-    <string name="title_search">查一查</string>
-    <string name="title_count">算一算</string>
-    <string name="title_user">我的</string>
+    <string name="ac_main_navigation_record">记一记</string>
+    <string name="ac_main_navigation_search">查一查</string>
+    <string name="ac_main_navigation_count">算一算</string>
+    <string name="ac_main_navigation_user">我的</string>
+
+    <string name="fg_record_time">时间</string>
+    <string name="fg_record_mode">收入/支出</string>
+    <string name="fg_record_consumption_category">消费类别</string>
+    <string name="fg_record_consumption_method">消费方式</string>
+    <string name="fg_record_income_category">收入类别</string>
+    <string name="fg_record_income_method">收入方式</string>
+    <string name="fg_record_amount">金额</string>
+    <string name="fg_record_remark">备注</string>
+    <string name="fg_record_save">保存</string>
 </resources>

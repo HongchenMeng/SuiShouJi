@@ -25,7 +25,5 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
-
-    }
+    public void onClick(View view) {}
 }

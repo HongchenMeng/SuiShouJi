@@ -3,11 +3,177 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <TextView
-        android:text="@string/title_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fg_record_time"
+                android:textSize="16sp"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <EditText
+                android:id="@+id/et_record_time"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/iv_time_picker"
+                android:src="@mipmap/ic_date"
+                android:scaleType="centerInside"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fg_record_mode"
+                android:textSize="16sp"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <Spinner
+                android:id="@+id/sp_mode"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:entries="@array/mode"
+                style="@android:style/Widget.Material.Spinner.Underlined"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:textSize="16sp"
+                android:text="@string/fg_record_consumption_category"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <Spinner
+                android:id="@+id/sp_category"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:entries="@array/consumption_category"
+                style="@android:style/Widget.Material.Spinner.Underlined"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_method"
+                android:textSize="16sp"
+                android:text="@string/fg_record_consumption_method"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <Spinner
+                android:id="@+id/sp_method"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:entries="@array/consumption_method"
+                style="@android:style/Widget.Material.Spinner.Underlined"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fg_record_amount"
+                android:textSize="16sp"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <EditText
+                android:id="@+id/et_record_amount"
+                android:inputType="numberDecimal"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fg_record_remark"
+                android:textSize="16sp"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:gravity="center|end" />
+
+            <EditText
+                android:id="@+id/et_record_remark"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:text="@string/fg_record_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
