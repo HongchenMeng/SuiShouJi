@@ -2,29 +2,34 @@ package space.levan.suishouji.view.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import space.levan.suishouji.App;
 import space.levan.suishouji.R;
 import space.levan.suishouji.view.adapter.MainFragmentAdapter;
+import space.levan.suishouji.view.base.BaseActivity;
 import space.levan.suishouji.view.fragment.CountFragment;
 import space.levan.suishouji.view.fragment.RecordFragment;
 import space.levan.suishouji.view.fragment.SearchFragment;
 import space.levan.suishouji.view.fragment.UserFragment;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
+
     private MainFragmentAdapter mMainFragmentAdapter;
     private RecordFragment mRecordFragment;
     private SearchFragment mSearchFragment;
     private CountFragment mCountFragment;
     private UserFragment mUserFragment;
+
+    private long exitTime = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item ->
@@ -79,22 +84,6 @@ public class MainActivity extends AppCompatActivity
         });
 
         setupViewPager(mViewpager);
-
-        /*
-        Bill bill = new Bill();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        Date date = new Date(System.currentTimeMillis());
-        bill.time = dateFormat.format(date);
-        bill.mode = "支出";
-        bill.category = "美团";
-        bill.method = "支付宝";
-        bill.amount = "95.00";
-        bill.remark = "";
-        RealmUtils.addToBill(bill);
-
-        Bill newBill = RealmUtils.getAllBill().get(0);
-        Log.w("WZY", newBill.toString());
-        */
     }
 
     private void setupViewPager(ViewPager mViewpager)
@@ -109,5 +98,20 @@ public class MainActivity extends AppCompatActivity
         mMainFragmentAdapter.addFragment(mCountFragment);
         mMainFragmentAdapter.addFragment(mUserFragment);
         mViewpager.setAdapter(mMainFragmentAdapter);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if ((System.currentTimeMillis() - exitTime) > 2000)
+        {
+            Snackbar.make(mNavigation, getString(R.string.app_exit), Snackbar.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        }
+        else
+        {
+            this.finish();
+            App.quiteApplication();
+        }
     }
 }

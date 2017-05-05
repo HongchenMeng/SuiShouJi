@@ -128,7 +128,6 @@ public class RecordFragment extends BaseFragment
 
     private void showDatePick()
     {
-        DatePickerDialog dialog;
         Calendar c = Calendar.getInstance();
 
         DatePickerDialog.OnDateSetListener dateListener = (datePicker, i, i1, i2) ->
@@ -137,13 +136,11 @@ public class RecordFragment extends BaseFragment
             mEtTime.setSelection((i + "-" + (i1+1) + "-" + i2).length());
         };
 
-        dialog = new DatePickerDialog(getActivity(),
+        new DatePickerDialog(getActivity(),
                 dateListener,
                 c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH),
-                c.get(Calendar.DAY_OF_MONTH));
-
-        dialog.show();
+                c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void saveData()

@@ -22,13 +22,17 @@ public class RealmUtils
     {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Bill> results = realm.where(Bill.class).findAll();
-        return results;
+        return results.sort("time");
     }
 
-    /*
-    public static void deleteBill()
+
+    public static void deleteFromBill(RealmResults<Bill> results, int position)
     {
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<Bill> results = realm.where(Bill.class).findAll();
-    }*/
+        realm.executeTransaction(realm1 ->
+        {
+            Bill bill = results.get(position);
+            bill.deleteFromRealm();
+        });
+    }
 }
