@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">随手记</string>
+    <string name="title_record">记一记</string>
+    <string name="title_search">查一查</string>
+    <string name="title_count">算一算</string>
+    <string name="title_user">我的</string>
+</resources>
