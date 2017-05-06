@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 import space.levan.suishouji.R;
 import space.levan.suishouji.bean.Bill;
+import space.levan.suishouji.utils.DateUtils;
 import space.levan.suishouji.utils.RealmUtils;
 import space.levan.suishouji.view.base.BaseFragment;
 
@@ -28,7 +29,7 @@ import space.levan.suishouji.view.base.BaseFragment;
 
 public class RecordFragment extends BaseFragment
 {
-    private EditText mEtTime;
+    private EditText mEtDate;
     private ImageView mIvTimePicker;
     private TextView mTvCategory;
     private TextView mTvMethod;
@@ -42,7 +43,7 @@ public class RecordFragment extends BaseFragment
     @Override
     protected void initView(View view, Bundle savedInstanceState)
     {
-        mEtTime = (EditText) view.findViewById(R.id.et_record_time);
+        mEtDate = (EditText) view.findViewById(R.id.et_record_date);
         mEtAmount = (EditText) view.findViewById(R.id.et_record_amount);
         mEtRemark = (EditText) view.findViewById(R.id.et_record_remark);
         mIvTimePicker = (ImageView) view.findViewById(R.id.iv_time_picker);
@@ -111,7 +112,7 @@ public class RecordFragment extends BaseFragment
                 showDatePick();
                 break;
             case R.id.btn_save:
-                if (!TextUtils.equals(mEtTime.getText().toString().trim(), "") ||
+                if (!TextUtils.equals(mEtDate.getText().toString().trim(), "") ||
                         !TextUtils.equals(mEtAmount.getText().toString().trim(), ""))
                 {
                     saveData();
@@ -132,8 +133,15 @@ public class RecordFragment extends BaseFragment
 
         DatePickerDialog.OnDateSetListener dateListener = (datePicker, i, i1, i2) ->
         {
-            mEtTime.setText(i + "-" + (i1+1) + "-" + i2);
-            mEtTime.setSelection((i + "-" + (i1+1) + "-" + i2).length());
+            if (i > c.get(Calendar.YEAR) || i1 > c.get(Calendar.MONTH) || i2 > c.get(Calendar.DAY_OF_MONTH))
+            {
+                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                mEtDate.setText(DateUtils.setDate(i, i1, i2));
+                mEtDate.setSelection(DateUtils.setDate(i, i1, i2).length());
+            }
         };
 
         new DatePickerDialog(getActivity(),
@@ -146,7 +154,7 @@ public class RecordFragment extends BaseFragment
     private void saveData()
     {
         Bill mBill = new Bill();
-        mBill.time = mEtTime.getText().toString().trim();
+        mBill.date = mEtDate.getText().toString().trim();
         mBill.mode = mModeSpinner.getSelectedItem().toString().trim();
         mBill.category = mCategorySpinner.getSelectedItem().toString().trim();
         mBill.method = mMethodSpinner.getSelectedItem().toString().trim();
@@ -156,7 +164,7 @@ public class RecordFragment extends BaseFragment
         mBtSave.setClickable(false);
         Log.w("RecordFragment", mBill.toString());
         Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();
-        mEtTime.setText("");
+        mEtDate.setText("");
         mModeSpinner.setSelection(0);
         mCategorySpinner.setSelection(0);
         mMethodSpinner.setSelection(0);

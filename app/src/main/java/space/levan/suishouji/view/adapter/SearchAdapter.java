@@ -78,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ((SearchHolder) holder).mTvAmount.setText(mBill.amount);
             ((SearchHolder) holder).mTvCategory.setText(mBill.category);
             ((SearchHolder) holder).mTvMethod.setText(mBill.method);
-            ((SearchHolder) holder).mTvTime.setText(mBill.time);
+            ((SearchHolder) holder).mTvDate.setText(mBill.date);
             ((SearchHolder) holder).itemView.setOnLongClickListener(view ->
             {
                 new AlertDialog.Builder(mContext)
@@ -106,7 +106,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private final TextView mTvAmount;
         private final TextView mTvCategory;
         private final TextView mTvMethod;
-        private final TextView mTvTime;
+        private final TextView mTvDate;
 
         public SearchHolder(View itemView)
         {
@@ -115,7 +115,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mTvAmount = (TextView) itemView.findViewById(R.id.tv_item_amount);
             mTvCategory = (TextView) itemView.findViewById(R.id.tv_item_category);
             mTvMethod = (TextView) itemView.findViewById(R.id.tv_item_method);
-            mTvTime = (TextView) itemView.findViewById(R.id.tv_item_time);
+            mTvDate = (TextView) itemView.findViewById(R.id.tv_item_date);
         }
     }
 

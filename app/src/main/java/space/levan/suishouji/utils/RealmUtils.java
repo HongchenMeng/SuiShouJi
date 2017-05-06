@@ -18,11 +18,13 @@ public class RealmUtils
         realm.commitTransaction();
     }
 
-    public static RealmResults<Bill> getAllBill()
+    public static RealmResults<Bill> getBill(String date)
     {
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Bill> results = realm.where(Bill.class).findAll();
-        return results.sort("time");
+        return Realm.getDefaultInstance()
+                .where(Bill.class)
+                .contains("date", date)
+                .findAll()
+                .sort("date");
     }
 
 

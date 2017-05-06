@@ -8,7 +8,7 @@ import io.realm.RealmObject;
 
 public class Bill extends RealmObject
 {
-    public String time;
+    public String date;
     public String mode;
     public String category;
     public String method;
@@ -18,7 +18,7 @@ public class Bill extends RealmObject
     @Override
     public String toString()
     {
-        return "time=" + time
+        return "date=" + date
                 + "mode=" + mode
                 + "category=" + category
                 + "method=" + method
