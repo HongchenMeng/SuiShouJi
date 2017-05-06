@@ -133,7 +133,11 @@ public class RecordFragment extends BaseFragment
 
         DatePickerDialog.OnDateSetListener dateListener = (datePicker, i, i1, i2) ->
         {
-            if (i > c.get(Calendar.YEAR) || i1 > c.get(Calendar.MONTH) || i2 > c.get(Calendar.DAY_OF_MONTH))
+            if (i > c.get(Calendar.YEAR) || i1 > c.get(Calendar.MONTH))
+            {
+                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期", Toast.LENGTH_SHORT).show();
+            }
+            else if ((i == c.get(Calendar.YEAR) && i1 == c.get(Calendar.MONTH)) && i2 > c.get(Calendar.DAY_OF_MONTH))
             {
                 Toast.makeText(getContext(), "不允许设置比当前时间晚的日期", Toast.LENGTH_SHORT).show();
             }
