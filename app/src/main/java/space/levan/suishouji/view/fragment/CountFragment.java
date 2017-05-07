@@ -18,6 +18,8 @@ import space.levan.suishouji.utils.DateUtils;
 import space.levan.suishouji.utils.RealmUtils;
 
 /**
+ * 算一算
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 
@@ -64,6 +66,11 @@ public class CountFragment extends Fragment
         return view;
     }
 
+    /**
+     * 判断Fragment对用户是否可见，实现懒加载
+     *
+     * @param isVisibleToUser 是否可见
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser)
     {
@@ -74,9 +81,12 @@ public class CountFragment extends Fragment
         }
     }
 
+    /**
+     * 加载数据，设置视图
+     */
     private void initView()
     {
-        mTvDate.setText(DateUtils.getDate(MARK));
+        mTvDate.setText(DateUtils.setDate(MARK));
 
         String[] consumption = this.getResources()
                 .getStringArray(R.array.consumption_category);
@@ -109,19 +119,19 @@ public class CountFragment extends Fragment
             for (int x = 0; x < modeTextView[i].length; x++)
             {
                 String strAmount = String.format(Locale.getDefault(), "%.2f",
-                        RealmUtils.getDetail(DateUtils.getDate(MARK), mode[i], type[i][x]));
+                        RealmUtils.getDetail(DateUtils.setDate(MARK), mode[i], type[i][x]));
 
                 modeTextView[i][x].setText(type[i][x] + "：" + strAmount);
             }
         }
 
         String strTotalConsumption = String.format(Locale.getDefault(), "%.2f",
-                RealmUtils.getTotalConsumption(DateUtils.getDate(MARK)));
+                RealmUtils.getTotalConsumption(DateUtils.setDate(MARK)));
         String strTotalIncome = String.format(Locale.getDefault(), "%.2f",
-                RealmUtils.getTotalIncome(DateUtils.getDate(MARK)));
+                RealmUtils.getTotalIncome(DateUtils.setDate(MARK)));
         String strTotal = String.format(Locale.getDefault(), "%.2f",
-                (RealmUtils.getTotalIncome(DateUtils.getDate(MARK))
-                        - RealmUtils.getTotalConsumption(DateUtils.getDate(MARK))));
+                (RealmUtils.getTotalIncome(DateUtils.setDate(MARK))
+                        - RealmUtils.getTotalConsumption(DateUtils.setDate(MARK))));
 
         mTvTotals.setText(mode[0] + "："
                 + strTotalConsumption + "，"

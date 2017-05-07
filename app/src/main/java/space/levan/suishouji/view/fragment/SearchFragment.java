@@ -21,6 +21,8 @@ import space.levan.suishouji.utils.RealmUtils;
 import space.levan.suishouji.view.adapter.SearchAdapter;
 
 /**
+ * 查一查
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 
@@ -57,7 +59,11 @@ public class SearchFragment extends Fragment
         return view;
     }
 
-
+    /**
+     * 判断Fragment对用户是否可见，实现懒加载
+     *
+     * @param isVisibleToUser 是否可见
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser)
     {
@@ -68,12 +74,15 @@ public class SearchFragment extends Fragment
         }
     }
 
+    /**
+     * 加载数据，填充RecyclerView
+     */
     private void initView()
     {
-        mTvDate.setText(DateUtils.getDate(MARK));
+        mTvDate.setText(DateUtils.setDate(MARK));
 
         mSearchAdapter = new SearchAdapter(getContext(),
-                RealmUtils.getBill(DateUtils.getDate(MARK)));
+                RealmUtils.getBill(DateUtils.setDate(MARK)));
 
         mRecyclerView.setAdapter(mSearchAdapter);
     }

@@ -3,6 +3,8 @@ package space.levan.suishouji.bean;
 import io.realm.RealmObject;
 
 /**
+ * Realm 数据库实体类
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 

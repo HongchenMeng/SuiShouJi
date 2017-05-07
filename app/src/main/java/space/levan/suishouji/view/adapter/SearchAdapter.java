@@ -18,6 +18,8 @@ import space.levan.suishouji.bean.Bill;
 import space.levan.suishouji.utils.RealmUtils;
 
 /**
+ * 查一查界面RecyclerView Adapter
+ *
  * Created by WangZhiYao on 2017/5/6.
  */
 
@@ -29,6 +31,12 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context mContext;
     private RealmResults<Bill> mBills;
 
+    /**
+     * 构造函数，将上下文与查询结果传递进来
+     *
+     * @param mContext 上下文
+     * @param mBills Realm查询结果
+     */
     public SearchAdapter(Context mContext, RealmResults<Bill> mBills)
     {
         this.mContext = mContext;

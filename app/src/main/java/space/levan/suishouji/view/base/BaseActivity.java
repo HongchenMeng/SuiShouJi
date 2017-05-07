@@ -7,6 +7,9 @@ import space.levan.suishouji.App;
 import space.levan.suishouji.utils.UIUtils;
 
 /**
+ * BaseActivity
+ * 用于管理Activity的生命周期
+ *
  * Created by WangZhiYao on 2017/5/6.
  */
 

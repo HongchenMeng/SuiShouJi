@@ -16,6 +16,12 @@ import space.levan.suishouji.view.fragment.RecordFragment;
 import space.levan.suishouji.view.fragment.SearchFragment;
 import space.levan.suishouji.view.fragment.UserFragment;
 
+/**
+ * 主页
+ *
+ * Created by WangZhiYao on 2017/5/5.
+ */
+
 public class MainActivity extends BaseActivity
 {
     @BindView(R.id.viewpager)
@@ -31,6 +37,9 @@ public class MainActivity extends BaseActivity
 
     private long exitTime = 0;
 
+    /**
+     * 底部菜单点击响应事件
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener
             mOnNavigationItemSelectedListener
             = item ->
@@ -63,6 +72,9 @@ public class MainActivity extends BaseActivity
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        /*
+          翻页设置底部栏菜单选中状态
+         */
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
@@ -87,6 +99,11 @@ public class MainActivity extends BaseActivity
         setupViewPager(mViewpager);
     }
 
+    /**
+     * 将Fragment添加进ViewPager
+     *
+     * @param mViewpager
+     */
     private void setupViewPager(ViewPager mViewpager)
     {
         mRecordFragment = new RecordFragment();
@@ -101,6 +118,10 @@ public class MainActivity extends BaseActivity
         mViewpager.setAdapter(mMainFragmentAdapter);
     }
 
+    /**
+     * 拦截物理返回按钮点击
+     * 实现双击退出
+     */
     @Override
     public void onBackPressed()
     {

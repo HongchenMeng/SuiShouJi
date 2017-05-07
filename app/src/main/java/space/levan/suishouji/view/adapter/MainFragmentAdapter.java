@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * FragmentAdapter
+ * 将Fragment与ViewPager进行适配
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 

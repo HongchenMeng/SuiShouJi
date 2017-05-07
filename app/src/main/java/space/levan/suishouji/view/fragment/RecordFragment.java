@@ -29,6 +29,8 @@ import space.levan.suishouji.utils.DateUtils;
 import space.levan.suishouji.utils.RealmUtils;
 
 /**
+ * 记一记
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 
@@ -63,6 +65,10 @@ public class RecordFragment extends Fragment
         return view;
     }
 
+    /**
+     * 对Spinner设置选项选中监听
+     * 实现Spinner联动
+     */
     AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener()
     {
         @Override
@@ -78,6 +84,11 @@ public class RecordFragment extends Fragment
         }
     };
 
+    /**
+     * 设置收入支出之后的Spinner要显示的内容
+     *
+     * @param i 被选中的选项 0 = 支出， 1 = 收入
+     */
     private void switchMode(int i)
     {
         String[] strCategory;
@@ -127,6 +138,9 @@ public class RecordFragment extends Fragment
         }
     }
 
+    /**
+     * 弹出时间选择对话框
+     */
     private void showDatePick()
     {
         Calendar c = Calendar.getInstance();
@@ -158,6 +172,10 @@ public class RecordFragment extends Fragment
                 c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    /**
+     * 将数据结构化为Bill实体
+     * 再将数据存储进Realm
+     */
     private void saveData()
     {
         Bill mBill     = new Bill();

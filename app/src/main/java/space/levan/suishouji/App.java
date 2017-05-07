@@ -13,6 +13,8 @@ import io.realm.RealmConfiguration;
 import space.levan.suishouji.view.base.BaseActivity;
 
 /**
+ * 全局类
+ *
  * Created by WangZhiYao on 2017/5/5.
  */
 
