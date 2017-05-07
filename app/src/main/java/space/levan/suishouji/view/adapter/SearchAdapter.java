@@ -25,8 +25,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private static final int TYPE_EMPTY = 0;
     private static final int TYPE_DEFAULT = 1;
-    private RealmResults<Bill> mBills;
+
     private Context mContext;
+    private RealmResults<Bill> mBills;
 
     public SearchAdapter(Context mContext, RealmResults<Bill> mBills)
     {

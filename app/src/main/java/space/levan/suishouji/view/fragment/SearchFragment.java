@@ -2,10 +2,8 @@ package space.levan.suishouji.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,22 +39,24 @@ public class SearchFragment extends Fragment
 
     private int MARK = 0;
 
-    private String TAG = "SearchFragment";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         unbinder = ButterKnife.bind(this, view);
+
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+        realm = Realm.getDefaultInstance();
+        realmListener = element -> initView();
+        realm.addChangeListener(realmListener);
 
-        initData();
+        initView();
+
         return view;
     }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser)
@@ -64,37 +64,17 @@ public class SearchFragment extends Fragment
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser)
         {
-            Log.w(TAG, isVisibleToUser + "");
-
-            //realm = Realm.getDefaultInstance();
-            //realmListener = (RealmChangeListener<Realm>) realm1 -> initData();
-            //realm.addChangeListener(realmListener);
-        }
-        else
-        {
-            /*
-            Log.w(TAG, isVisibleToUser + "");
-            if (realmListener != null)
-            {
-                Log.w(TAG, "0");
-                realm.removeChangeListener(realmListener);
-            }
-            else
-            {
-                Log.w(TAG, "1");
-                realm = Realm.getDefaultInstance();
-                realmListener = (RealmChangeListener<Realm>) realm1 -> initData();
-                realm.addChangeListener(realmListener);
-            }*/
+            initView();
         }
     }
 
-    private void initData()
+    private void initView()
     {
         mTvDate.setText(DateUtils.getDate(MARK));
 
         mSearchAdapter = new SearchAdapter(getContext(),
                 RealmUtils.getBill(DateUtils.getDate(MARK)));
+
         mRecyclerView.setAdapter(mSearchAdapter);
     }
 
@@ -105,11 +85,11 @@ public class SearchFragment extends Fragment
         {
             case R.id.iv_search_before:
                 MARK -= 1;
-                initData();
+                initView();
                 break;
             case R.id.iv_search_after:
                 MARK += 1;
-                initData();
+                initView();
                 break;
         }
     }

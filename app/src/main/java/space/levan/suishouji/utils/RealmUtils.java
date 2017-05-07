@@ -2,6 +2,8 @@ package space.levan.suishouji.utils;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import space.levan.suishouji.App;
+import space.levan.suishouji.R;
 import space.levan.suishouji.bean.Bill;
 
 /**
@@ -27,7 +29,7 @@ public class RealmUtils
                 .sort("date");
     }
 
-    public static double getTotal(String date, String mode, String category)
+    public static double getDetail(String date, String mode, String category)
     {
         return Realm.getDefaultInstance()
                 .where(Bill.class)
@@ -35,6 +37,36 @@ public class RealmUtils
                 .beginGroup()
                 .equalTo("mode", mode)
                 .equalTo("category", category)
+                .endGroup()
+                .sum("amount")
+                .doubleValue();
+    }
+
+    public static double getTotalConsumption(String date)
+    {
+        return Realm.getDefaultInstance()
+                .where(Bill.class)
+                .contains("date", date)
+                .beginGroup()
+                .equalTo("mode", "支出")
+                .in("category", App.getApplication()
+                        .getResources()
+                        .getStringArray(R.array.consumption_category))
+                .endGroup()
+                .sum("amount")
+                .doubleValue();
+    }
+
+    public static double getTotalIncome(String date)
+    {
+        return Realm.getDefaultInstance()
+                .where(Bill.class)
+                .contains("date", date)
+                .beginGroup()
+                .equalTo("mode", "收入")
+                .in("category", App.getApplication()
+                        .getResources()
+                        .getStringArray(R.array.income_category))
                 .endGroup()
                 .sum("amount")
                 .doubleValue();

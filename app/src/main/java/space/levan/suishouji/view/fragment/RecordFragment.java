@@ -23,8 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import space.levan.suishouji.R;
 import space.levan.suishouji.bean.Bill;
 import space.levan.suishouji.utils.DateUtils;
@@ -56,30 +54,13 @@ public class RecordFragment extends Fragment
     @BindView(R.id.btn_save)
     Button mBtnSave;
 
-    private String TAG = "RecordFragment";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.w(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.fragment_record, container, false);
         unbinder  = ButterKnife.bind(this, view);
         mSpMode.setOnItemSelectedListener(listener);
         return view;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser)
-    {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-        {
-            Log.w(TAG, isVisibleToUser + "");
-        }
-        else
-        {
-            Log.w(TAG, isVisibleToUser + "");
-        }
     }
 
     AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener()
