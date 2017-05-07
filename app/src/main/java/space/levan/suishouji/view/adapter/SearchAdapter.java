@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import io.realm.RealmResults;
 import space.levan.suishouji.R;
 import space.levan.suishouji.bean.Bill;
@@ -75,7 +77,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             {
                 ((SearchHolder) holder).mIvMode.setImageResource(R.mipmap.ic_expend);
             }
-            ((SearchHolder) holder).mTvAmount.setText(mBill.amount);
+            ((SearchHolder) holder).mTvAmount.setText(String.format(Locale.getDefault(), "%.2f", mBill.amount));
             ((SearchHolder) holder).mTvCategory.setText(mBill.category);
             ((SearchHolder) holder).mTvMethod.setText(mBill.method);
             ((SearchHolder) holder).mTvDate.setText(mBill.date);

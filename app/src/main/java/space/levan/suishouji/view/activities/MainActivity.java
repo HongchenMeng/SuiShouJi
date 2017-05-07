@@ -23,15 +23,16 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
 
+    private UserFragment        mUserFragment;
+    private CountFragment       mCountFragment;
+    private RecordFragment      mRecordFragment;
+    private SearchFragment      mSearchFragment;
     private MainFragmentAdapter mMainFragmentAdapter;
-    private RecordFragment mRecordFragment;
-    private SearchFragment mSearchFragment;
-    private CountFragment mCountFragment;
-    private UserFragment mUserFragment;
 
     private long exitTime = 0;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private BottomNavigationView.OnNavigationItemSelectedListener
+            mOnNavigationItemSelectedListener
             = item ->
     {
         switch (item.getItemId())

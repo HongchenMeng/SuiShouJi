@@ -27,6 +27,18 @@ public class RealmUtils
                 .sort("date");
     }
 
+    public static double getTotal(String date, String mode, String category)
+    {
+        return Realm.getDefaultInstance()
+                .where(Bill.class)
+                .contains("date", date)
+                .beginGroup()
+                .equalTo("mode", mode)
+                .equalTo("category", category)
+                .endGroup()
+                .sum("amount")
+                .doubleValue();
+    }
 
     public static void deleteFromBill(RealmResults<Bill> results, int position)
     {

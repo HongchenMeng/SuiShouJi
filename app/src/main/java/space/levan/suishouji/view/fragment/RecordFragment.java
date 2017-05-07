@@ -2,14 +2,16 @@ package space.levan.suishouji.view.fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,65 +19,83 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import space.levan.suishouji.R;
 import space.levan.suishouji.bean.Bill;
 import space.levan.suishouji.utils.DateUtils;
 import space.levan.suishouji.utils.RealmUtils;
-import space.levan.suishouji.view.base.BaseFragment;
 
 /**
  * Created by WangZhiYao on 2017/5/5.
  */
 
-public class RecordFragment extends BaseFragment
+public class RecordFragment extends Fragment
 {
-    private EditText mEtDate;
-    private ImageView mIvTimePicker;
-    private TextView mTvCategory;
-    private TextView mTvMethod;
-    private Spinner mModeSpinner;
-    private Spinner mCategorySpinner;
-    private Spinner mMethodSpinner;
-    private EditText mEtAmount;
-    private EditText mEtRemark;
-    private Button mBtSave;
+    @BindView(R.id.et_record_date)
+    EditText mEtDate;
+    @BindView(R.id.sp_mode)
+    Spinner mSpMode;
+    @BindView(R.id.tv_category)
+    TextView mTvCategory;
+    @BindView(R.id.sp_category)
+    Spinner mSpCategory;
+    @BindView(R.id.tv_method)
+    TextView mTvMethod;
+    @BindView(R.id.sp_method)
+    Spinner mSpMethod;
+    @BindView(R.id.et_record_amount)
+    EditText mEtAmount;
+    @BindView(R.id.et_record_remark)
+    EditText mEtRemark;
+    Unbinder unbinder;
+    @BindView(R.id.btn_save)
+    Button mBtnSave;
+
+    private String TAG = "RecordFragment";
 
     @Override
-    protected void initView(View view, Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        mEtDate = (EditText) view.findViewById(R.id.et_record_date);
-        mEtAmount = (EditText) view.findViewById(R.id.et_record_amount);
-        mEtRemark = (EditText) view.findViewById(R.id.et_record_remark);
-        mIvTimePicker = (ImageView) view.findViewById(R.id.iv_time_picker);
-        mIvTimePicker.setOnClickListener(this);
-        mTvCategory = (TextView) view.findViewById(R.id.tv_category);
-        mTvMethod = (TextView) view.findViewById(R.id.tv_method);
-        mBtSave = (Button) view.findViewById(R.id.btn_save);
-        mBtSave.setOnClickListener(this);
-        mModeSpinner = (Spinner) view.findViewById(R.id.sp_mode);
-        mCategorySpinner = (Spinner) view.findViewById(R.id.sp_category);
-        mMethodSpinner = (Spinner) view.findViewById(R.id.sp_method);
-        mModeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        Log.w(TAG, "onCreateView");
+        View view = inflater.inflate(R.layout.fragment_record, container, false);
+        unbinder  = ButterKnife.bind(this, view);
+        mSpMode.setOnItemSelectedListener(listener);
+        return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
         {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                switchMode(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView)
-            {
-
-            }
-        });
+            Log.w(TAG, isVisibleToUser + "");
+        }
+        else
+        {
+            Log.w(TAG, isVisibleToUser + "");
+        }
     }
 
-    @Override
-    protected int getLayoutId()
+    AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener()
     {
-        return R.layout.fragment_record;
-    }
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            switchMode(i);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView)
+        {
+
+        }
+    };
 
     private void switchMode(int i)
     {
@@ -98,13 +118,14 @@ public class RecordFragment extends BaseFragment
         {
             mListData.add(strCategory[x]);
         }
-        mArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mListData);
+        mArrayAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, mListData);
         mArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCategorySpinner.setAdapter(mArrayAdapter);
+        mSpCategory.setAdapter(mArrayAdapter);
     }
 
-    @Override
-    public void onClick(View view)
+    @OnClick({R.id.iv_time_picker, R.id.btn_save})
+    public void onViewClicked(View view)
     {
         switch (view.getId())
         {
@@ -112,8 +133,8 @@ public class RecordFragment extends BaseFragment
                 showDatePick();
                 break;
             case R.id.btn_save:
-                if (!TextUtils.equals(mEtDate.getText().toString().trim(), "") ||
-                        !TextUtils.equals(mEtAmount.getText().toString().trim(), ""))
+                if (!(TextUtils.equals(mEtDate.getText().toString().trim(), "") ||
+                        TextUtils.equals(mEtAmount.getText().toString().trim(), "")))
                 {
                     saveData();
                 }
@@ -121,8 +142,6 @@ public class RecordFragment extends BaseFragment
                 {
                     Toast.makeText(getActivity(), "请填写时间或金额", Toast.LENGTH_SHORT).show();
                 }
-                break;
-            default:
                 break;
         }
     }
@@ -135,11 +154,14 @@ public class RecordFragment extends BaseFragment
         {
             if (i > c.get(Calendar.YEAR) || i1 > c.get(Calendar.MONTH))
             {
-                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期",
+                        Toast.LENGTH_SHORT).show();
             }
-            else if ((i == c.get(Calendar.YEAR) && i1 == c.get(Calendar.MONTH)) && i2 > c.get(Calendar.DAY_OF_MONTH))
+            else if ((i == c.get(Calendar.YEAR) && i1 == c.get(Calendar.MONTH))
+                    && i2 > c.get(Calendar.DAY_OF_MONTH))
             {
-                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "不允许设置比当前时间晚的日期",
+                        Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -157,23 +179,30 @@ public class RecordFragment extends BaseFragment
 
     private void saveData()
     {
-        Bill mBill = new Bill();
-        mBill.date = mEtDate.getText().toString().trim();
-        mBill.mode = mModeSpinner.getSelectedItem().toString().trim();
-        mBill.category = mCategorySpinner.getSelectedItem().toString().trim();
-        mBill.method = mMethodSpinner.getSelectedItem().toString().trim();
-        mBill.amount = mEtAmount.getText().toString().trim();
-        mBill.remark = mEtRemark.getText().toString().trim();
+        Bill mBill     = new Bill();
+        mBill.date     = mEtDate.getText().toString().trim();
+        mBill.mode     = mSpMode.getSelectedItem().toString().trim();
+        mBill.category = mSpCategory.getSelectedItem().toString().trim();
+        mBill.method   = mSpMethod.getSelectedItem().toString().trim();
+        mBill.amount   = Double.parseDouble(mEtAmount.getText().toString().trim());
+        mBill.remark   = mEtRemark.getText().toString().trim();
         RealmUtils.addToBill(mBill);
-        mBtSave.setClickable(false);
-        Log.w("RecordFragment", mBill.toString());
+        mBtnSave.setClickable(false);
         Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();
+        Log.w("WZY", mBill.toString());
         mEtDate.setText("");
-        mModeSpinner.setSelection(0);
-        mCategorySpinner.setSelection(0);
-        mMethodSpinner.setSelection(0);
+        mSpMode.setSelection(0);
+        mSpCategory.setSelection(0);
+        mSpMethod.setSelection(0);
         mEtAmount.setText("");
         mEtRemark.setText("");
-        mBtSave.setClickable(true);
+        mBtnSave.setClickable(true);
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

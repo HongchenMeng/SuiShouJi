@@ -23,5 +23,4 @@ public class ExampleInstrumentedTest {
 
         assertEquals("space.levan.suishouji", appContext.getPackageName());
     }
-
 }

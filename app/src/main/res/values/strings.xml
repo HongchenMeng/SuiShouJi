@@ -22,4 +22,7 @@
     <string name="fg_search_method">方式</string>
     <string name="fg_search_time">时间</string>
     <string name="fg_search_tips">还没有账单</string>
+
+    <string name="fg_count_income">收入</string>
+    <string name="fg_count_consumption">支出</string>
 </resources>

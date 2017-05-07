@@ -1,8 +1,13 @@
 package space.levan.suishouji.view.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import space.levan.suishouji.R;
 import space.levan.suishouji.view.base.BaseFragment;
 
@@ -10,17 +15,15 @@ import space.levan.suishouji.view.base.BaseFragment;
  * Created by WangZhiYao on 2017/5/5.
  */
 
-public class UserFragment extends BaseFragment
+public class UserFragment extends Fragment
 {
-    @Override
-    protected void initView(View view, Bundle savedInstanceState)
-    {
-
-    }
+    private String TAG = "UserFragment";
 
     @Override
-    protected int getLayoutId()
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return R.layout.fragment_user;
+        Log.w(TAG, "onCreateView");
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        return view;
     }
 }

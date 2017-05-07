@@ -15,7 +15,7 @@ public class DateUtils
     {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MONTH, i);
-        return new SimpleDateFormat("yyyy-MM", Locale.CHINA)
+        return new SimpleDateFormat("yyyy-MM", Locale.getDefault())
                 .format(new Date(c.getTimeInMillis()));
     }
 
@@ -25,7 +25,7 @@ public class DateUtils
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 .format(new Date(c.getTimeInMillis()));
     }
 }

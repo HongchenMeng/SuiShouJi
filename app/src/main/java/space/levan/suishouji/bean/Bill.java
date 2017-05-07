@@ -12,7 +12,7 @@ public class Bill extends RealmObject
     public String mode;
     public String category;
     public String method;
-    public String amount;
+    public double amount;
     public String remark;
 
     @Override
