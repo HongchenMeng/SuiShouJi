@@ -2,7 +2,6 @@ package space.levan.suishouji.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,9 +65,9 @@ public class CountFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_count, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
-        realm = Realm.getDefaultInstance();
-        realmListener = (RealmChangeListener<Realm>) realm1 -> initView();
-        realm.addChangeListener(realmListener);
+        //realm = Realm.getDefaultInstance();
+        //realmListener = (RealmChangeListener<Realm>) realm1 -> initView();
+        //realm.addChangeListener(realmListener);
         return view;
     }
 
@@ -78,27 +77,29 @@ public class CountFragment extends Fragment
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser)
         {
+            /*
             Log.w(TAG, isVisibleToUser + "");
 
             realm = Realm.getDefaultInstance();
             realmListener = (RealmChangeListener<Realm>) realm1 -> initView();
-            realm.addChangeListener(realmListener);
+            realm.addChangeListener(realmListener);*/
         }
         else
         {
+            /*
             Log.w(TAG, isVisibleToUser + "");
             if (realmListener != null)
             {
-                realm.removeChangeListener(realmListener);
+                //realm.removeChangeListener(realmListener);
             }
             else
             {
-                /*
-                realm = Realm.getDefaultInstance();
-                realmListener = (RealmChangeListener<Realm>) realm1 -> initView();
-                realm.addChangeListener(realmListener);*/
+
+                //realm = Realm.getDefaultInstance();
+                //realmListener = (RealmChangeListener<Realm>) realm1 -> initView();
+                //realm.addChangeListener(realmListener);
                 //initView();
-            }
+            }*/
         }
     }
 

@@ -66,12 +66,13 @@ public class SearchFragment extends Fragment
         {
             Log.w(TAG, isVisibleToUser + "");
 
-            realm = Realm.getDefaultInstance();
-            realmListener = (RealmChangeListener<Realm>) realm1 -> initData();
-            realm.addChangeListener(realmListener);
+            //realm = Realm.getDefaultInstance();
+            //realmListener = (RealmChangeListener<Realm>) realm1 -> initData();
+            //realm.addChangeListener(realmListener);
         }
         else
         {
+            /*
             Log.w(TAG, isVisibleToUser + "");
             if (realmListener != null)
             {
@@ -84,7 +85,7 @@ public class SearchFragment extends Fragment
                 realm = Realm.getDefaultInstance();
                 realmListener = (RealmChangeListener<Realm>) realm1 -> initData();
                 realm.addChangeListener(realmListener);
-            }
+            }*/
         }
     }
 
