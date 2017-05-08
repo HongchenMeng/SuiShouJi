@@ -66,6 +66,9 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    /**
+     * 用户登录
+     */
     private void userSignIn()
     {
         String username = mEtUsername.getText().toString().trim();
@@ -96,6 +99,9 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    /**
+     * 用户注册
+     */
     private void showRegisterDialog()
     {
         LayoutInflater inflater = (LayoutInflater)this
@@ -151,6 +157,9 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    /**
+     * 重置密码
+     */
     private void showResetPasswordDialog()
     {
         LayoutInflater inflater = (LayoutInflater)this

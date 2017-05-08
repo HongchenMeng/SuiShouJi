@@ -12,7 +12,7 @@ import space.levan.suishouji.R;
 import space.levan.suishouji.view.base.BaseActivity;
 
 /**
- * 用户登录
+ * Splash
  *
  * Created by WangZhiYao on 2017/5/8.
  */
