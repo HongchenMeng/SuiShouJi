@@ -117,11 +117,20 @@ public class LoginActivity extends BaseActivity
                 {
                     EditText mEtUsername1 = (EditText)registerLayout.findViewById(R.id.et_register_username);
                     EditText mEtPassword1 = (EditText)registerLayout.findViewById(R.id.et_register_password);
+                    EditText mEtVerifiedPassword = (EditText)registerLayout.findViewById(R.id.et_register_verified_password);
                     EditText mEtEmail = (EditText)registerLayout.findViewById(R.id.et_register_email);
                     String username = mEtUsername1.getText().toString().trim();
                     String password = mEtPassword1.getText().toString().trim();
+                    String verifiedPassword = mEtVerifiedPassword.getText().toString().trim();
                     String email = mEtEmail.getText().toString().trim();
-                    userRegister(username, password, email);
+                    if (TextUtils.equals(password, verifiedPassword))
+                    {
+                        userRegister(username, password, email);
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "两次输入的密码要一致！", Toast.LENGTH_SHORT).show();
+                    }
                 })
                 .setNegativeButton("取消", null)
                 .show();

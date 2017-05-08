@@ -1,5 +1,6 @@
 package space.levan.suishouji.view.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -94,8 +95,35 @@ public class UserFragment extends Fragment
         unbinder.unbind();
     }
 
-    @OnClick(R.id.btn_logout)
-    public void onViewClicked()
+    @OnClick({R.id.btn_delete_all, R.id.btn_logout})
+    public void onViewClicked(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.btn_delete_all:
+                showDeleteAllDialog();
+                break;
+            case R.id.btn_logout:
+                showLogoutDialog();
+                break;
+        }
+    }
+
+    private void showDeleteAllDialog()
+    {
+        new AlertDialog.Builder(getContext())
+                .setTitle("删除确认")
+                .setMessage("确定要清除所有数据吗？")
+                .setPositiveButton("确定", (dialogInterface, i) ->
+                {
+                    RealmUtils.deleteAllBill();
+                    initView();
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+    private void showLogoutDialog()
     {
         new AlertDialog.Builder(getContext())
                 .setTitle("退出登录")
@@ -108,6 +136,5 @@ public class UserFragment extends Fragment
                 })
                 .setNegativeButton("取消", null)
                 .show();
-
     }
 }

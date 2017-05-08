@@ -16,6 +16,7 @@
 
     <string name="ac_register_username">用户名</string>
     <string name="ac_register_password">密码</string>
+    <string name="ac_register_verified_password">确认密码</string>
     <string name="ac_register_email">邮箱</string>
     <string name="ac_register_register">注册</string>
 
@@ -39,5 +40,7 @@
     <string name="fg_count_income">收入</string>
     <string name="fg_count_consumption">支出</string>
 
+    <string name="fg_user_delete_all">清除所有数据</string>
     <string name="fg_user_logout">退出登录</string>
+
 </resources>

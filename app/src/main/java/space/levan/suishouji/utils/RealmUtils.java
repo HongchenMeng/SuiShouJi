@@ -151,4 +151,11 @@ public class RealmUtils
             bill.deleteFromRealm();
         });
     }
+
+    public static void deleteAllBill()
+    {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Bill> results = realm.where(Bill.class).findAll();
+        realm.executeTransaction(realm1 -> results.deleteAllFromRealm());
+    }
 }

@@ -23,18 +23,21 @@
         android:id="@+id/btn_signin"
         android:text="@string/ac_login_signin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btn_register"
         android:text="@string/ac_login_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btn_forget_password"
         android:text="@string/ac_login_forget_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

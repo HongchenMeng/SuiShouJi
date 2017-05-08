@@ -108,5 +108,6 @@ public class SearchFragment extends Fragment
     {
         super.onDestroyView();
         unbinder.unbind();
+        realm.removeChangeListener(realmListener);
     }
 }
