@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">随手记</string>
+    <string name="app_name_py">SuiShouJi</string>
     <string name="app_exit">再按一次退出</string>
+
     <string name="ac_main_navigation_record">记一记</string>
     <string name="ac_main_navigation_search">查一查</string>
     <string name="ac_main_navigation_count">算一算</string>
     <string name="ac_main_navigation_user">我的</string>
+
+    <string name="ac_login_username">用户名</string>
+    <string name="ac_login_password">密码</string>
+    <string name="ac_login_signin">登录</string>
+    <string name="ac_login_register">注册</string>
+    <string name="ac_login_forget_password">忘记密码</string>
+
+    <string name="ac_register_username">用户名</string>
+    <string name="ac_register_password">密码</string>
+    <string name="ac_register_email">邮箱</string>
+    <string name="ac_register_register">注册</string>
 
     <string name="fg_record_time">时间</string>
     <string name="fg_record_mode">收入/支出</string>
@@ -25,4 +38,6 @@
 
     <string name="fg_count_income">收入</string>
     <string name="fg_count_consumption">支出</string>
+
+    <string name="fg_user_logout">退出登录</string>
 </resources>

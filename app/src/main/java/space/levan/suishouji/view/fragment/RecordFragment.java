@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVUser;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -185,6 +187,7 @@ public class RecordFragment extends Fragment
         mBill.method   = mSpMethod.getSelectedItem().toString().trim();
         mBill.amount   = Double.parseDouble(mEtAmount.getText().toString().trim());
         mBill.remark   = mEtRemark.getText().toString().trim();
+        mBill.user     = AVUser.getCurrentUser().getUsername();
         RealmUtils.addToBill(mBill);
         mBtnSave.setClickable(false);
         Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();

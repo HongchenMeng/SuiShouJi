@@ -16,6 +16,7 @@ public class Bill extends RealmObject
     public String method;
     public double amount;
     public String remark;
+    public String user;
 
     @Override
     public String toString()
@@ -25,6 +26,7 @@ public class Bill extends RealmObject
                 + "category=" + category
                 + "method=" + method
                 + "amount=" + amount
-                + "remark=" + remark;
+                + "remark=" + remark
+                + "user=" + user;
     }
 }

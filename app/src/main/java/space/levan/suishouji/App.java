@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.avos.avoscloud.AVOSCloud;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -30,13 +32,16 @@ public class App extends Application
         mApp = this;
         activities = new LinkedList<>();
         initRealm();
+        AVOSCloud.initialize(this,
+                "hMrIgm5mc7gBH9RfXMHLK2Ts-gzGzoHsz",
+                "iGqKMDXYmbHwFG6PQGIrD57F");
     }
 
     private void initRealm()
     {
         Realm.init(this);
         RealmConfiguration config = new  RealmConfiguration.Builder()
-                .name("Bill.realm")
+                .name("SuiShouJi.realm")
                 .build();
         Realm.setDefaultConfiguration(config);
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <me.wangyuwei.particleview.ParticleView
+        android:id="@+id/pv_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:pv_background_color="@color/colorPrimary"
+        app:pv_host_text="@string/app_name"
+        app:pv_host_text_anim_time="300"
+        app:pv_particle_text="@string/app_name_py"
+        app:pv_particle_text_size="12sp"
+        app:pv_spread_anim_time="300"
+        app:pv_text_anim_time="1000"
+        app:pv_text_color="#FFFFFF" />
+
+</LinearLayout>

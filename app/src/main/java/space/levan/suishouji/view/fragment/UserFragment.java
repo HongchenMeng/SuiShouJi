@@ -1,23 +1,29 @@
 package space.levan.suishouji.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
+
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import space.levan.suishouji.R;
 import space.levan.suishouji.utils.RealmUtils;
+import space.levan.suishouji.view.activities.LoginActivity;
 
 /**
  * 我的
- *
+ * <p>
  * Created by WangZhiYao on 2017/5/5.
  */
 
@@ -68,7 +74,7 @@ public class UserFragment extends Fragment
 
         double mTotal = 0;
 
-        for (int i  = 0; i < method.length; i++)
+        for (int i = 0; i < method.length; i++)
         {
             String total = String.format(Locale.getDefault(), "%.2f",
                     RealmUtils.getTotal(method[i]));
@@ -86,5 +92,22 @@ public class UserFragment extends Fragment
     {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.btn_logout)
+    public void onViewClicked()
+    {
+        new AlertDialog.Builder(getContext())
+                .setTitle("退出登录")
+                .setMessage("确定要退出登录吗？")
+                .setPositiveButton("确定", (dialogInterface, i) ->
+                {
+                    AVUser.logOut();
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
+                })
+                .setNegativeButton("取消", null)
+                .show();
+
     }
 }

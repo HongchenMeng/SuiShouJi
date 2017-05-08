@@ -1,5 +1,7 @@
 package space.levan.suishouji.utils;
 
+import com.avos.avoscloud.AVUser;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import space.levan.suishouji.App;
@@ -37,6 +39,7 @@ public class RealmUtils
     {
         return Realm.getDefaultInstance()
                 .where(Bill.class)
+                .equalTo("user", AVUser.getCurrentUser().getUsername())
                 .contains("date", date)
                 .findAll()
                 .sort("date");
@@ -54,6 +57,7 @@ public class RealmUtils
     {
         return Realm.getDefaultInstance()
                 .where(Bill.class)
+                .equalTo("user", AVUser.getCurrentUser().getUsername())
                 .contains("date", date)
                 .beginGroup()
                 .equalTo("mode", mode)
@@ -73,6 +77,7 @@ public class RealmUtils
     {
         return Realm.getDefaultInstance()
                 .where(Bill.class)
+                .equalTo("user", AVUser.getCurrentUser().getUsername())
                 .contains("date", date)
                 .beginGroup()
                 .equalTo("mode", "支出")
@@ -94,6 +99,7 @@ public class RealmUtils
     {
         return Realm.getDefaultInstance()
                 .where(Bill.class)
+                .equalTo("user", AVUser.getCurrentUser().getUsername())
                 .contains("date", date)
                 .beginGroup()
                 .equalTo("mode", "收入")
@@ -115,6 +121,7 @@ public class RealmUtils
     {
         return (Realm.getDefaultInstance()
                        .where(Bill.class)
+                       .equalTo("user", AVUser.getCurrentUser().getUsername())
                        .equalTo("mode", "收入")
                        .equalTo("method", method)
                        .sum("amount")
@@ -122,6 +129,7 @@ public class RealmUtils
                 -
                 (Realm.getDefaultInstance()
                         .where(Bill.class)
+                        .equalTo("user", AVUser.getCurrentUser().getUsername())
                         .equalTo("mode", "支出")
                         .equalTo("method", method)
                         .sum("amount")
