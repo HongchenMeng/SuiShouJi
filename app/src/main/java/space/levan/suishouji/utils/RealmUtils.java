@@ -152,6 +152,9 @@ public class RealmUtils
         });
     }
 
+    /**
+     * 删除数据库内所有数据
+     */
     public static void deleteAllBill()
     {
         Realm realm = Realm.getDefaultInstance();
